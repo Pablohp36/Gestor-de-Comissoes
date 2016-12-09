@@ -1,0 +1,75 @@
+.gravar{
+	background-image: url("/images/vaca.png");
+}
+.ui-datagrid-will-dark{
+	background: black;
+	color: white;
+}
+
+.ui-painel-parto{
+	//;,background: #d9edf7;
+}
+
+.ui-widget-header {
+	
+	
+	
+	background: rgba(158, 207, 246, 0.8);
+	background: #3a87ad;
+	color: white;
+	!important;
+}
+
+.ui-dialog-content{
+	
+}
+.ui-panel{
+	
+}
+body {
+	background: #EDEFF1 ;
+	
+}
+.ui-panel{
+	background: #F5F5F5;
+	
+}
+.ui-panel-titlebar{
+	
+}
+
+
+.dash{
+	//width: 300px;
+	height: 100px;
+	width: 100%;
+}
+
+.ui-dialog-title{
+	color:black;
+}
+
+.bt-excluir{
+	background:red; color:white;
+	!important;
+}
+.ui-panel .ui-widget .ui-widget-content .ui-corner-all{
+	
+}
+.confirma{
+	background-color:grenn;
+	color: white;
+	!important;
+	
+}
+.exclui{
+	background-color:red;
+	color: white;
+	!important;
+	
+}
+
+.ui-datatable thead th, .ui-datatable tbody td, .ui-datatable tfoot td {
+    border-style: none;
+}
+

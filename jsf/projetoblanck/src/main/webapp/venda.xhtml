@@ -1,0 +1,114 @@
+<ui:composition template="/WEB-INF/templates/Layout2.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+	<ui:define name="titulo">Dashboard</ui:define>
+
+	<ui:define name="corpo">
+	<h:form>
+			<h:messages/>
+		<p:panel header="Registro de Venda" id="registroVenda">
+		
+		<p:panelGrid columns="6"  >
+			
+		
+			<p:outputLabel for="codigo" value="Código: "/>
+			<p:inputText id="codigo" value="#{vendaBean.venda.codigo}" disabled="true"/>
+			
+			<p:outputLabel for="dataVenda" value="Data da Venda: "/>
+			<p:calendar id="dataVenda" value="#{vendaBean.venda.dataDaVenda}" />
+			
+			<p:outputLabel for="cliente" value="Cliente :"/>
+			<p:inputText id="cliente" value="#{vendaBean.venda.cliente}"/>
+			
+			<p:outputLabel for="representante" value="Representante: "/>
+			<p:inputText id="representante" value="#{vendaBean.venda.representante}"/>
+			
+			<p:outputLabel for="valor" value="Valor :"/>
+			<p:inputText id="valor" value="#{vendaBean.venda.valor}"/>
+			
+			
+			
+		</p:panelGrid>
+		<p:toolbar>
+			<p:toolbarGroup>
+				<p:commandButton value="Salvar" action="#{vendaBean.salvar}" update="registroVenda, vendasRegistradas "/>
+			</p:toolbarGroup>
+		</p:toolbar>
+		
+		</p:panel>
+		<p:panel header="Vendas registradas" id="vendasRegistradas">
+		<p:dataTable value="#{vendaBean.vendas}" var="venda" >
+		<p:column headerText="Código:">
+			<h:outputText value="#{venda.codigo}"/>		
+		</p:column >
+		<p:column headerText="Data da Venda: ">
+			<h:outputText value="#{venda.dataDaVenda}">
+				<f:convertDateTime pattern="dd/MM/YYYY"/>
+			</h:outputText>		
+		</p:column>
+		<p:column headerText="Cliente: ">
+			<h:outputText value="#{venda.cliente}"/>		
+		</p:column>
+		<p:column headerText="Representante: ">
+			<h:outputText value="#{venda.representante}"/>		
+		</p:column>
+		<p:column headerText="Valor: ">
+			<h:outputText value="#{venda.valor}"/>		
+		</p:column>
+		<p:column headerText="Ação: ">
+			<p:commandButton value="Detalhes" action="#{vendaBean.selecionarVenda(venda.codigo)}" update="faturamento"/>	
+		</p:column>
+			
+		</p:dataTable>
+		
+		</p:panel>
+		<p:panel header="Faturamento" id="faturamento" >
+		
+			<p:panelGrid columns="10">
+				<p:outputLabel for="codigo" value="Código: "/>
+				<h:outputText id="codigo" value="#{vendaBean.venda.codigo}" disabled="true"/>
+				
+				<p:outputLabel for="dataVenda" value="Data da Venda: "/>
+				<h:outputText id="dataVenda" value="#{vendaBean.venda.dataDaVenda}" >
+					<f:convertDateTime pattern="dd/MM/YYYY"/>
+				</h:outputText>
+				
+				<p:outputLabel for="cliente" value="Cliente :"/>
+				<h:outputText id="cliente" value="#{vendaBean.venda.cliente}"/>
+				
+				<p:outputLabel for="representante" value="Representante: "/>
+				<h:outputText id="representante" value="#{vendaBean.venda.representante}"/>
+				
+				<p:outputLabel for="valor" value="Valor :"/>
+				<h:outputText id="valor" value="#{vendaBean.venda.valor}"/>
+			</p:panelGrid>
+			<p:dataTable value="#{vendaBean.venda.faturas}" var="fatura" id="tabelaFaturas">
+				<p:column headerText="Código: ">
+					<h:outputText value="#{fatura.codigo}"/>
+				</p:column>
+				<p:column headerText="Data de Vencimento: ">
+					<h:outputText value="#{fatura.dataDeVencimento}">
+						<f:convertDateTime pattern="dd/MM/YYYY"/>
+					</h:outputText>
+				</p:column>
+				<p:column headerText="Valor: ">
+					<h:outputText value="#{fatura.valor}"/>
+				</p:column>
+				<p:column headerText="Pagamento Realizado">
+					<h:outputText value="#{fatura.dataDoPagamento}"/>
+				</p:column>
+				<p:column headerText="Baixar fatura:">
+					<p:commandButton value="Baixar" action="#{vendaBean.baixarFatura(fatura.codigo)}" update="tabelaFaturas"/>
+				</p:column>
+			</p:dataTable>
+			
+		</p:panel>
+		</h:form>
+	</ui:define>
+	</ui:composition>
