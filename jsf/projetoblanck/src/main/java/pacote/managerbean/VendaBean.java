@@ -24,12 +24,17 @@ public class VendaBean implements Serializable {
 	 private Venda venda = new Venda();
 	 private List<Venda> vendas;
 	 private Fatura fatura;
-	 private List<Fatura> faturas;
-	 private Boolean render = false;
+	 private List<Fatura> faturas;	
+	 
+	 private Boolean vendaRender = false;
+	 private Boolean vendasRender = false;
+	 private Boolean faturamentoRender = false;
+	 private Boolean relatorioRender = false;
 	 
 	 @PostConstruct
 	 public void init(){
 		 popularLista();
+		 selectVendaRender();
 	 }
  
 	
@@ -44,6 +49,67 @@ public class VendaBean implements Serializable {
 	public List<Venda> getVendas() {
 		return vendas;
 	}
+		
+
+	public Boolean getVendaRender() {
+		return vendaRender;
+	}
+
+
+	public void selectVendaRender() {
+		 esconderPaineis();
+		this.vendaRender = true;
+		this.venda = new Venda();
+		
+	}
+
+
+	public Boolean getVendasRender() {
+		return vendasRender;
+	}
+
+
+	public void selectVendasRender() {
+		esconderPaineis();
+		this.vendasRender = true;
+		this.faturamentoRender = true;
+	}
+
+
+	public Boolean getRelatorioRender() {
+		return relatorioRender;
+	}
+
+
+	public void selectRelatorioRender() {
+		esconderPaineis();
+		this.relatorioRender = true;
+	}
+	
+
+	public Boolean getFaturamentoRender() {
+		return faturamentoRender;
+	}
+
+
+	public void selectFaturamentoRender() {
+		esconderPaineis();
+		this.faturamentoRender = true;
+	}
+
+
+	public void setVendas(List<Venda> vendas) {
+		this.vendas = vendas;
+	}
+	
+	private void esconderPaineis(){
+		
+		 vendaRender = false;
+		 vendasRender = false;
+		 faturamentoRender = false;
+		  relatorioRender = false;
+	}
+
 
 	public void salvar(){
 		salvarFatura();

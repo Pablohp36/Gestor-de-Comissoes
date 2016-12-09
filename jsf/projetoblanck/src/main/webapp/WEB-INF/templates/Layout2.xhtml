@@ -23,12 +23,14 @@
 	<div class="ui-fluid">
 	
 	<div class="container">
+	<h:form>
 		<p:menubar>
-			<p:menuitem value="Venda" url="#" />
-			<p:menuitem value="Listagem de Venda" url="#" />
-			<p:menuitem value="Faturamento" url="#"  />
-			<p:menuitem value="Relatórios" url="#"  />
+			<p:menuitem value="Venda" action="#{vendaBean.selectVendaRender}" update="@all"  />
+			<p:menuitem value="Listagem de Venda" action="#{vendaBean.selectVendasRender}" update="@all"/>
+			<p:menuitem value="Faturamento" action="#{vendaBean.selectFaturamentoRender}" update="@all" rendered="false" />
+			<p:menuitem value="Relatórios" action="#{vendaBean.selectRelatorioRender}" update="@all" />
 		</p:menubar>
+	</h:form>
 	<ui:insert name="corpo"></ui:insert>
 	</div>
 	</div>

@@ -10,11 +10,13 @@
 	<ui:define name="titulo">Dashboard</ui:define>
 
 	<ui:define name="corpo">
+	
 	<h:form>
-			<h:messages/>
-		<p:panel header="Registro de Venda" id="registroVenda">
+		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+			
+		<p:panel header="Registro de Venda" id="registroVenda" rendered="#{vendaBean.vendaRender}">
 		
-		<p:panelGrid columns="6"  >
+		<p:panelGrid columns="6" styleClass="grid"  >
 			
 		
 			<p:outputLabel for="codigo" value="Código: "/>
@@ -37,12 +39,14 @@
 		</p:panelGrid>
 		<p:toolbar>
 			<p:toolbarGroup>
-				<p:commandButton value="Salvar" action="#{vendaBean.salvar}" update="registroVenda, vendasRegistradas "/>
+				<p:commandButton value="Salvar" action="#{vendaBean.salvar}" update="registroVenda, formVendasRegistradas "/>
 			</p:toolbarGroup>
 		</p:toolbar>
 		
 		</p:panel>
-		<p:panel header="Vendas registradas" id="vendasRegistradas">
+		</h:form>
+		<h:form id="formVendasRegistradas">
+		<p:panel header="Vendas registradas" id="vendasRegistradas" rendered="#{vendaBean.vendasRender}">
 		<p:dataTable value="#{vendaBean.vendas}" var="venda" >
 		<p:column headerText="Código:">
 			<h:outputText value="#{venda.codigo}"/>		
@@ -62,13 +66,15 @@
 			<h:outputText value="#{venda.valor}"/>		
 		</p:column>
 		<p:column headerText="Ação: ">
-			<p:commandButton value="Detalhes" action="#{vendaBean.selecionarVenda(venda.codigo)}" update="faturamento"/>	
+			<p:commandButton value="Detalhes" action="#{vendaBean.selecionarVenda(venda.codigo)}" update="formFaturamentoPanel"/>	
 		</p:column>
 			
 		</p:dataTable>
 		
 		</p:panel>
-		<p:panel header="Faturamento" id="faturamento" >
+		</h:form>
+		<h:form id="formFaturamentoPanel">
+		<p:panel header="Faturamento" id="faturamentoPanel" rendered="#{vendaBean.faturamentoRender}">
 		
 			<p:panelGrid columns="10">
 				<p:outputLabel for="codigo" value="Código: "/>
@@ -100,15 +106,20 @@
 				<p:column headerText="Valor: ">
 					<h:outputText value="#{fatura.valor}"/>
 				</p:column>
-				<p:column headerText="Pagamento Realizado">
+				<p:column headerText="Pagamento Realizado" rendered="false">
 					<h:outputText value="#{fatura.dataDoPagamento}"/>
 				</p:column>
-				<p:column headerText="Baixar fatura:">
+				<p:column headerText="Baixar fatura:" rendered="false">
 					<p:commandButton value="Baixar" action="#{vendaBean.baixarFatura(fatura.codigo)}" update="tabelaFaturas"/>
 				</p:column>
 			</p:dataTable>
 			
 		</p:panel>
+		</h:form>
+		<h:form id="relatorios">
+			<p:panel id="relatorioPanel" rendered="#{vendaBean.relatorioRender}">
+			
+			</p:panel>
 		</h:form>
 	</ui:define>
 	</ui:composition>
